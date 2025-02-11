@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
+
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="logo">
+        <i class="fas fa-dragon"></i>
+        <span>DRAGON</span>
+    </div>
+
+    <div class="container">
+        <div class="side-panel">
+            <div class="form-container">
+                <form id="loginForm" class="form" action="auth.php" method="POST">
+                    <h2 style="color: #fff; margin-bottom: 2rem; font-size: 2rem; font-weight: 600;">Welcome Back</h2>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <label style="color: #fff; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" style="accent-color: #1890ff;">
+                            <span style="font-size: 0.9rem;">Remember me</span>
+                        </label>
+                        <a href="#" style="color: #1890ff; text-decoration: none; font-size: 0.9rem;">Forgot password?</a>
+                    </div>
+                    <input type="submit" value="Login" class="btn solid" />
+                    
+         
+                    <div class="social-login">
+                        <a href="php/discordlogin.php" class="discord-btn">
+                            <i class="fab fa-discord"></i>
+                            Continue with Discord
+                        </a>
+                    </div>
+
+                    <div class="toggle-form">
+                        <p>Don't have an account? <a href="#" id="toggleRegister">Register</a></p>
+                    </div>
+                </form>
+
+                <form id="registerForm" class="form" action="php/register.php" method="POST" style="display: none;">
+                    <h2 style="color: #fff; margin-bottom: 2rem; font-size: 2rem; font-weight: 600;">Create Account</h2>
+                    <div class="form-group">
+                        <label for="reg-username">Username</label>
+                        <input type="text" id="reg-username" name="username" placeholder="Choose a username" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" name="email" placeholder="Enter your email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" name="password" placeholder="Create a password" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <button type="submit" class="btn">
+                        <i class="fas fa-user-plus" style="margin-right: 8px;"></i>
+                        <span>Register</span>
+                    </button>
+                    <div class="toggle-form">
+                        <p>Already have an account? <a href="#" id="toggleLogin">Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="content-panel">
+            <div>
+                <h1>Welcome to Dragon</h1>
+                <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 3rem;">Experience the future of secure authentication</p>
+               
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Secure Platform</h3>
+                        <p>Advanced encryption and security measures to protect your data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Fast Performance</h3>
+                        <p>Lightning-fast response times and seamless experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile Ready</h3>
+                        <p>Fully responsive design that works on all devices.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Round-the-clock customer support for all your needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="social-links">
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const toggleRegister = document.getElementById('toggleRegister');
+        const toggleLogin = document.getElementById('toggleLogin');
+
+        toggleRegister.addEventListener('click', (event) => {
+            event.preventDefault();
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        toggleLogin.addEventListener('click', (event) => {
+            event.preventDefault();
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Form submission feedback
+        const showNotification = (message, isError = false) => {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.background = isError ? 'rgba(255, 59, 48, 0.9)' : 'rgba(24, 144, 255, 0.9)';
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 3000);
+        };
+
+        // Example form submission handling
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add your actual login logic here
+            showNotification('Login successful!');
+        });
+
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add your actual registration logic here
+            showNotification('Registration successful!');
+        });
+    </script>
+</body>
+</html>
